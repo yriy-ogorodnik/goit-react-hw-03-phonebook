@@ -58,14 +58,17 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem(' contacts', JSON.stringify(this.state.contacts));
+    const prevStateContacts = prevState.contacts;
+    const nextStayContacts = this.state.contacts;
+
+    if (nextStayContacts !== prevStateContacts) {
+      localStorage.setItem('lscontacts', JSON.stringify(nextStayContacts));
     }
   }
 
   componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parse = JSON.parse(contacts);
+    const contact = localStorage.getItem('lscontacts');
+    const parse = JSON.parse(contact);
     if (parse) {
       this.setState({ contacts: parse });
     }
